@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Songs</title>
+</head>
+<body>
+    <h1>Recommended Songs</h1>
+    {% if songs %}
+    <ul>
+        {% for song in songs %}
+        <li>
+            <img src="{{ song['album_art'] }}" alt="Album Art" width="100">
+            <a href="{{ song['spotify_url'] }}" target="_blank">{{ song['name'] }} - {{ song['artists'] }}</a>
+            <p>Year: {{ song['year'] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No recommendations found.</p>
+    {% endif %}
+</body>
+</html>
