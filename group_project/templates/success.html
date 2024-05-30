@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,5 +19,102 @@
     {% else %}
     <p>No recommendations found.</p>
     {% endif %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Songs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+        .songs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .song-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .song-item img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .song-info {
+            margin-top: 15px;
+        }
+        .song-info a {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1db954;
+            text-decoration: none;
+        }
+        .song-info a:hover {
+            text-decoration: underline;
+        }
+        .song-info p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+        .no-recommendations {
+            text-align: center;
+            color: #777;
+        }
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommended Songs</h1>
+    {% if songs %}
+    <div class="songs-container">
+        {% for song in songs %}
+        <div class="song-item">
+            <img src="{{ song['album_art'] }}" alt="Album Art">
+            <div class="song-info">
+                <a href="{{ song['spotify_url'] }}" target="_blank">{{ song['name'] }} - {{ song['artists'] }}</a>
+                <p>Year: {{ song['year'] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-recommendations">No recommendations found.</p>
+    {% endif %}
+    <a href="{{ url_for('recommend') }}" class="back-button">Back to Search</a>
 </body>
 </html>
